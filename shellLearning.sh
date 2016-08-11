@@ -119,7 +119,7 @@ file2="./test_file2.txt"
 if [ -e "$file1"  ]; then 
 	echo "file exists"
 else 
-	mkdir test_file1.txt
+	mkdir test_dir
 fi
 
 #using normal coding 
@@ -261,4 +261,5 @@ while [[ $# -gt 0 ]]; do  # $# will get the values of the parameters
 done
 echo "$sum"
 
-clear
+rm -rf test_dir
+#clear
