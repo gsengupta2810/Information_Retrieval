@@ -3,4 +3,8 @@ The folder Assignment1 contains query.txt, output.txt, alldocs.rar.
 2. alldocs.rar contains documents file named with doc id. Each document has set of sentences.
 3. output.txt contains top 50 relevant documents (doc id) for each query.
 
+Procedure:
+All queries are made  on and based search  using repeted grep on 
 
+Outputs :
+The time for each queiry will be written in time_grep.txt
