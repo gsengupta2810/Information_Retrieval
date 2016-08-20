@@ -15,7 +15,7 @@ rm -rf result0.txt
 
 while read id query
 do
-	echo $query
+	echo $id $query
 	count=0
 	search=""
 	temp="$result$count$dot$txt"
@@ -23,7 +23,6 @@ do
 	time_start=$(date +"%s")
 	for word in $query 
 	do 
-		echo $word
 		if (( count ==0 ));then
 			temp="$result$count$dot$txt"
 			grep -iw -r -l "$word" alldocs > $temp
@@ -31,8 +30,12 @@ do
 		elif (( count!=0 )) ; then 
 			temp="$result$count$dot$txt"
 			grep -iw -l "$word" $(cat $temp1) >$temp
-			rm -rf $temp1
-			temp1=$temp
+			if [[ -s $temp ]] ; then
+				rm -rf $temp1
+				temp1=$temp
+			else
+				rm -rf $temp
+			fi ;
 		fi
 		count=$(( count+1 ))
 	done
@@ -43,11 +46,7 @@ do
 	mv ./$temp1 ./$search_results_folder
 	time_end=$(date +"%s") 
 	time_of_query=$(( time_end-time_start ))
-	echo "$time_of_query" >> $time_grep
+	echo "$id $time_of_query" >> $time_grep
 done < "$file"
 
 
-# time_start=$(date +"%s")
-#     grep -i -r "$query" . 
-#  	time_end=$(date +"%s") 
-# time_of_query=$(( time_end-time_start ))
